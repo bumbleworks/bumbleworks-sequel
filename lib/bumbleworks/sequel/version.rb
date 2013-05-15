@@ -1,5 +1,5 @@
 module Bumbleworks
   module Sequel
-    VERSION = "0.0.1"
+    VERSION = "0.0.2"
   end
 end
