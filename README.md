@@ -1,4 +1,4 @@
-# Bumbleworks::Redis
+# Bumbleworks::Sequel
 
 Allows you to use any database that [Sequel](http://redis.io) supports for your [Bumbleworks](http://github.com/bumbleworks/bumbleworks) process storage.  Just including this gem in your gemfile will automatically register the adapter by default.
 
