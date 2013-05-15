@@ -1,7 +1,7 @@
 require "bumbleworks/sequel/version"
+require "bumbleworks/sequel/adapter"
 
 module Bumbleworks
   module Sequel
-    # Your code goes here...
   end
 end
