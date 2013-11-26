@@ -49,4 +49,8 @@ describe Bumbleworks::Sequel::Adapter do
       described_class.use?('Sequel').should be_false
     end
   end
+
+  it 'allows history storage' do
+    described_class.allow_history_storage?.should be_true
+  end
 end
