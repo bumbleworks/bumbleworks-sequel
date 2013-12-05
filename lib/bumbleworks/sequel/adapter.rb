@@ -16,6 +16,12 @@ module Bumbleworks
         def use?(storage)
           storage.class.name =~ /^#{storage_class}/
         end
+
+        def wrap_storage_with_driver(storage, options = {})
+          options['sequel_table_name'] ||= 'bumbleworks_documents'
+          ::Ruote::Sequel.create_table(storage, false, options['sequel_table_name'])
+          driver.new(storage, options)
+        end
       end
     end
   end

@@ -18,7 +18,7 @@ describe Bumbleworks::Ruote do
     Bumbleworks.configuration.add_storage_adapter(Bumbleworks::Sequel::Adapter)
     storage = Sequel.connect('mock://ninja/turtles')
     Bumbleworks.storage = storage
-    Ruote::Sequel::Storage.should_receive(:new).with(storage)
+    Bumbleworks::Sequel::Adapter.should_receive(:wrap_storage_with_driver).with(storage, {})
     described_class.send(:storage)
   end
 

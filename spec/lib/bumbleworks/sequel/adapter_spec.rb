@@ -38,7 +38,7 @@ describe Bumbleworks::Sequel::Adapter do
     end
   end
 
-  describe 'use?' do
+  describe '.use?' do
     it 'returns true if given storage class matches Sequel' do
       described_class.use?(Sequel.connect('mock://ninja/turtles')).should be_true
     end
@@ -50,7 +50,23 @@ describe Bumbleworks::Sequel::Adapter do
     end
   end
 
-  it 'allows history storage' do
-    described_class.allow_history_storage?.should be_true
+  describe '.allow_history_storage?' do
+    it 'returns true' do
+      described_class.allow_history_storage?.should be_true
+    end
+  end
+
+  describe '.wrap_storage_with_driver' do
+    it 'creates the table and returns new ruote storage' do
+      ::Ruote::Sequel.should_receive(:create_table).with(:storage, false, 'choofles').ordered
+      described_class.driver.should_receive(:new).with(:storage, { 'sequel_table_name' => 'choofles' }).ordered
+      described_class.wrap_storage_with_driver(:storage, 'sequel_table_name' => 'choofles')
+    end
+
+    it 'defaults the table name to bumbleworks_documents' do
+      ::Ruote::Sequel.should_receive(:create_table).with(:storage, false, 'bumbleworks_documents').ordered
+      described_class.driver.should_receive(:new).with(:storage, { 'sequel_table_name' => 'bumbleworks_documents' }).ordered
+      described_class.wrap_storage_with_driver(:storage)
+    end
   end
 end
