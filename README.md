@@ -15,6 +15,12 @@ Set Bumbleworks.storage to a Sequel database connection.  You can use Sequel.con
 ```ruby
 Bumbleworks.configure do |c|
   c.storage = Sequel.connect('postgres://user:password@host:port/database_name')
+
+  # optionally, set the table to use for the key-value store
+  # (if not set, it will default to 'bumbleworks_documents')
+  #
+  # c.storage_options = { :sequel_table_name => 'bumbleworks_documents' }
+
   # ...
 end
 ```

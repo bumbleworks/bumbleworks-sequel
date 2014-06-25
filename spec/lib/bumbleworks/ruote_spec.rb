@@ -2,7 +2,6 @@ require 'bumbleworks'
 
 describe Bumbleworks::Ruote do
   before :each do
-    Bumbleworks.reset!
     Bumbleworks::Sequel::Adapter.auto_register = false
   end
 
@@ -18,7 +17,7 @@ describe Bumbleworks::Ruote do
     Bumbleworks.configuration.add_storage_adapter(Bumbleworks::Sequel::Adapter)
     storage = Sequel.connect('mock://ninja/turtles')
     Bumbleworks.storage = storage
-    Bumbleworks::Sequel::Adapter.should_receive(:wrap_storage_with_driver).with(storage, {})
+    expect(Ruote::Sequel::Storage).to receive(:new).with(storage, {'sequel_table_name' => 'bumbleworks_documents'})
     described_class.send(:storage)
   end
 
